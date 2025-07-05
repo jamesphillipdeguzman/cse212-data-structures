@@ -13,7 +13,21 @@ public static class Arrays
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
 
-        return []; // replace this return statement with your own
+        // Initialization of an empty result double array
+        double[] result = [];
+        // Set the size of this array to the given length
+        result = new double[length];
+
+        // Use a for loop to get the starting number and length or size
+        for (int i = 1; i <= length; i++)
+        {
+            // Multiply the given start number (e.g., 7) each pass to i (e.g., 1, 2, 3, 4, 5)
+            double multiple = number * i;
+            // Add the results to the result array;  cast the number to double
+            result[i - 1] = (double)multiple;
+        }
+        Console.WriteLine("The result is: " + string.Join(",", result));
+        return result; // return the result
     }
 
     /// <summary>
@@ -29,5 +43,7 @@ public static class Arrays
         // Remember: Using comments in your program, write down your process for solving this problem
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
+
+
     }
 }
