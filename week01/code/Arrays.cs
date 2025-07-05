@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 public static class Arrays
 {
     /// <summary>
@@ -26,7 +28,7 @@ public static class Arrays
             // Add the results to the result array;  cast the number to double
             result[i - 1] = (double)multiple;
         }
-        Console.WriteLine("The result is: " + string.Join(",", result));
+        Debug.WriteLine("The result is: " + string.Join(",", result));
         return result; // return the result
     }
 
@@ -44,6 +46,31 @@ public static class Arrays
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
 
+        // Get the startIndex (e.g., start) and amountToReturn (e.g., amount)
+        int amountToReturn = amount;
+        int start = data.Count - amount;
+
+        // Use GetRange to slice the data beginning at the starting index and return number of values using amountToReturn.
+        // This will return your slicedSet that you will need to rotate.
+        List<int> slicedSet = data.GetRange(start, amountToReturn);
+
+        // Return the numbers on the left side
+        int amountToReturn2 = start;
+        // Start at 0 index and return the rest of the numbers to the right. This will be your appendSet.
+        List<int> appendSet = data.GetRange(0, amountToReturn2);
+
+        // Append the appendSet to the slicedSet
+        slicedSet.AddRange(appendSet);
+
+        // Clear the original data set
+        data.Clear();
+        // Re-assign the newly arranged set of numbers to data
+        data.AddRange(slicedSet);
+        // Optional check to see if their count are the same
+        if (data.Count == slicedSet.Count)
+            Debug.WriteLine(string.Join(","), data);
+
+        return;
 
     }
 }
