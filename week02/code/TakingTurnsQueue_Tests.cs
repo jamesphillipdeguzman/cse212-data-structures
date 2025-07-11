@@ -87,7 +87,8 @@ public class TakingTurnsQueueTests
     // Scenario: Create a queue with the following people and turns: Bob (2), Tim (Forever), Sue (3)
     // Run 10 times.
     // Expected Result: Bob, Tim, Sue, Bob, Tim, Sue, Tim, Sue, Tim, Tim
-    // Defect(s) Found: 
+    // Defect(s) Found: Players with 0 or forever turns like Time was never added back to the queue because there was nothing in the code to check for 
+    // players with less than or equal to 0 turns. I've added it to TakingTurnsQueue class to make this scenario pass. 
     public void TestTakingTurnsQueue_ForeverZero()
     {
         var timTurns = 0;
@@ -118,8 +119,7 @@ public class TakingTurnsQueueTests
     // Scenario: Create a queue with the following people and turns: Tim (Forever), Sue (3)
     // Run 10 times.
     // Expected Result: Tim, Sue, Tim, Sue, Tim, Sue, Tim, Tim, Tim, Tim
-    // Defect(s) Found: Players with 0 or forever turns like Time was never added back to the queue because there was nothing in the code to check for 
-    // players with less than or equal to 0 turns. I've added it to TakingTurnsQueue class to make this scenario pass. 
+    // Defect(s) Found: None
 
     public void TestTakingTurnsQueue_ForeverNegative()
     {
