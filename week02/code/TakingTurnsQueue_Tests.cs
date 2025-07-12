@@ -87,7 +87,7 @@ public class TakingTurnsQueueTests
     // Scenario: Create a queue with the following people and turns: Bob (2), Tim (Forever), Sue (3)
     // Run 10 times.
     // Expected Result: Bob, Tim, Sue, Bob, Tim, Sue, Tim, Sue, Tim, Tim
-    // Defect(s) Found: Players with 0 or forever turns like Time was never added back to the queue because there was nothing in the code to check for 
+    // Defect(s) Found: Players with 0 or forever turns like Tim was never added back to the queue because there was nothing in the code to check for 
     // players with less than or equal to 0 turns. I've added it to TakingTurnsQueue class to make this scenario pass. 
     public void TestTakingTurnsQueue_ForeverZero()
     {

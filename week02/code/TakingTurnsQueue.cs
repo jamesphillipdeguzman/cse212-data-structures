@@ -46,8 +46,8 @@ public class TakingTurnsQueue
                 _people.Enqueue(person);
             }
 
-            if (person.Turns <= 0)
-                _people.Enqueue(person);
+            if (person.Turns <= 0)       // Fixed Defect: People with 0 or less than 0 (e.g., 'Forever') are not added back to the queue
+                _people.Enqueue(person); // add them here...
 
             return person;
         }
