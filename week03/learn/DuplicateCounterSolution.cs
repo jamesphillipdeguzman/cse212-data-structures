@@ -28,7 +28,7 @@
     /// Loop through the data, check for membership in the set.
     /// If yes, then increase the counter; otherwise, add it to the set.
     /// </summary>
-    private static int CountDuplicates(int[] data)
+    private static int CountDuplicates(  int[] data)
     {
         // Add code here.
         var unique = new HashSet<int>();
