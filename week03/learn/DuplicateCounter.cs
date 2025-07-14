@@ -38,9 +38,9 @@ public class DuplicateCounter
 
             numbers.Add(num); // ignore duplicates
             uniqueCounter += 1;
-            dupes = data.Length - uniqueCounter; // get total duplicates by subracting uniqueCounter from data length.
-
+            
         }
+        dupes = data.Length - uniqueCounter; // get total duplicates by subracting uniqueCounter from data length.
         return dupes;
     }
 }
