@@ -21,8 +21,79 @@ public static class SetsAndMaps
     /// <param name="words">An array of 2-character words (lowercase, no duplicates)</param>
     public static string[] FindPairs(string[] words)
     {
-        // TODO Problem 1 - ADD YOUR CODE HERE
-        return [];
+        // Steps to solve Problem 1: Finding Pairs
+        // Test Case 1:
+        // (FindPairs_TwoPairs)   : ["am", "at", "ma", "if", "fi"];
+        //             Returns    : "ma & am", "fi & if" ;
+
+        // Test Case 2: 
+        // (FindPairs_OnePair)    : ["ab", "bc", "cd", "de", "ba"];
+        //             Returns    : { "ba & ab" };
+
+        // Test Case 3:
+        // (FindPairs_SameChar)   : ["ab", "aa", "ba"]
+        //             Returns    : { "ba & ab" }
+
+        // Test Case 4:
+        // (FindPairs_ThreePairs) : ["ab", "ba", "ac", "ad", "da", "ca"]
+        //               Returns  : { "ba & ab", "da & ad", "ca & ac" }
+
+        // Test Case 5: 
+        // (FindPairs_ThreePairsNumbers) : ["23", "84", "49", "13", "32", "46", "91", "99", "94", "31", "57", "14"]
+        //                       Returns : { "32 & 23", "94 & 49", "31 & 13" }
+
+        // Test Case 6:
+        // (FindPairs_NoPairs)   : ["ab", "ac"]
+        //               Returns : nothing
+
+        // Steps to solve Problem 1 (FindPairs):
+        // 1) Split the string by comma as delimeter to separate each letter or number pair (e.g., am, at, ma, etc.). Save as HashSet<string> called pairs
+        // 2) Create a SwapLetters function or find a way to swap each letter-pair and save the results in another HashSet<string> called results.
+        // 3) If the two letters or characters were the same (e.g., aa or 11), return the results. 
+        //    Otherwise, swap their positions and remove the swapped items to avoid re-scanning.
+        // 4) Save the results and return to the calling Test functions.
+
+
+        // Split the string by comma as delimeter to separate each letter pair (e.g., am, at, ma, etc.). Save as HashSet<string> letterPairs
+        var pairs = new HashSet<string>(words);
+
+        var results = new HashSet<string>();
+
+        var swappedPos = "";
+
+        Console.WriteLine(pairs);
+
+        // Swap letters
+        foreach (var pair in pairs)
+        {
+            var pos1 = pair.Substring(0, 1).ToLower().Trim(); // Get first letter or number
+            var pos2 = pair.Substring(1, 1).ToLower().Trim(); // Get second letter or number
+
+            if (pos1 == pos2)
+            {
+                return results.ToArray(); // if the letters or numbers were identical, return the results as an array
+            }
+            else
+            {
+                swappedPos = pos2 + pos1;  // Swap the positions (e.g., of letter or numbers)     
+            }
+
+
+
+            // Check if the swapped letter or number is contained in pairs
+            if (pairs.Contains(swappedPos))
+            {
+
+                var swappedPairs = pair + " & " + swappedPos; // Combine and concatenate the matched pairs
+                pairs.Remove(swappedPos); // Remove the matched pair to avoid re-checking
+
+                results.Add(swappedPairs);
+            }
+
+        }
+
+
+        return results.ToArray();
     }
 
     /// <summary>
