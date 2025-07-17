@@ -110,10 +110,31 @@ public static class SetsAndMaps
     public static Dictionary<string, int> SummarizeDegrees(string filename)
     {
         var degrees = new Dictionary<string, int>();
+        var seen = new HashSet<string>();
         foreach (var line in File.ReadLines(filename))
         {
             var fields = line.Split(",");
-            // TODO Problem 2 - ADD YOUR CODE HERE
+            seen.Add(fields[3].Trim());
+
+            foreach (var item in seen)
+            {
+                if (fields.Contains(item))
+                {
+                    //degrees[fields[3].Trim()] += degrees[fields[4].Trim()];
+
+                    string key = degrees[item].ToString();
+                    int value = degrees[fields[4]];
+
+                    degrees[key] = value;
+
+                    Console.WriteLine(String.Join(", ", degrees[key]));
+                }
+
+            }
+
+
+            //degrees = int.Parse(degrees[earned]);
+
         }
 
         return degrees;
