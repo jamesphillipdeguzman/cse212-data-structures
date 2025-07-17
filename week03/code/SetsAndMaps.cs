@@ -1,4 +1,6 @@
+using System.Diagnostics;
 using System.Text.Json;
+using Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces;
 
 public static class SetsAndMaps
 {
@@ -110,30 +112,43 @@ public static class SetsAndMaps
     public static Dictionary<string, int> SummarizeDegrees(string filename)
     {
         var degrees = new Dictionary<string, int>();
-        var seen = new HashSet<string>();
+        
+        // Initialize variables here
+        string key = "";
+        int value = 0;
+    
         foreach (var line in File.ReadLines(filename))
         {
             var fields = line.Split(",");
-            seen.Add(fields[3].Trim());
 
-            foreach (var item in seen)
+            key = fields[3].Trim().ToString(); // Extract the new key for degrees in column 4
+
+            if (fields.Contains(key)) // Does the field contain the key? (e.g., "Bachelors")
             {
-                if (fields.Contains(item))
+                // If yes, get the value and parse it to integer
+                value = int.Parse(fields[4].Trim().ToString()); // Get the value or number of people who earned the degree (e.g., column 5)
+
+
+
+                if (!degrees.ContainsKey(key)) // if degrees does not contain the key yet, add it
                 {
-                    //degrees[fields[3].Trim()] += degrees[fields[4].Trim()];
 
-                    string key = degrees[item].ToString();
-                    int value = degrees[fields[4]];
+                    degrees.Add(key, value); // add the key and value to degrees dictionary
+                    degrees[key] = 1; // first time seeing this key value pair
+                }
+                else
+                {
+                    degrees[key]++;// Count the number of people who earned this degree
 
-                    degrees[key] = value;
 
-                    Console.WriteLine(String.Join(", ", degrees[key]));
                 }
 
+                
+               
+
+                //Debug.WriteLine(String.Join(", ", degrees));
             }
 
-
-            //degrees = int.Parse(degrees[earned]);
 
         }
 
