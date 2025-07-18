@@ -272,15 +272,36 @@ public static class SetsAndMaps
         using var jsonStream = client.Send(getRequestMessage).Content.ReadAsStream();
         using var reader = new StreamReader(jsonStream);
         var json = reader.ReadToEnd();
-        var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+        //var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
 
-        var featureCollection = JsonSerializer.Deserialize<FeatureCollection>(json, options);
+        var data = JsonSerializer.Deserialize<FeatureCollection>(json);
+        // var feature = JsonSerializer.Deserialize<Features>(json);
+        //var features = featureCollection.Features;
+        //var metadata = featureCollection.Data;
+
 
         // TODO Problem 5:
         // 1. Add code in FeatureCollection.cs to describe the JSON using classes and properties 
         // on those classes so that the call to Deserialize above works properly.
         // 2. Add code below to create a string out each place a earthquake has happened today and its magitude.
         // 3. Return an array of these string descriptions.
+        // string[] summary = new string[featureCollection.metadata.count];
+        // for (int i = 0; i < featureCollection.metadata.count; i++)
+        // {
+        // var place = feature.properties.place;
+        //var mag = featureCollection.features.properties.mag;
+        //summary[i] = featureCollection.Earthquake.Property.Mag.ToString() + " - Mag " + featureCollection.Features.properties.Mag.ToString();
+
+        //Debug.WriteLine($"{features.Properties.Place} - Mag {features.Properties.Mag}");
+        // }
+
+
+        foreach (var feature in data.features)
+        {
+            var mag = feature.properties.mag;
+            var place = feature.properties.place;
+        }
+
         return [];
     }
 }
