@@ -1,4 +1,5 @@
 using System.Text.Json;
+using System.Diagnostics;
 
 public static class SetsAndMaps
 {
@@ -110,30 +111,43 @@ public static class SetsAndMaps
     public static Dictionary<string, int> SummarizeDegrees(string filename)
     {
         var degrees = new Dictionary<string, int>();
-        var seen = new HashSet<string>();
+
+        // Initialize variables here
+        string key = "";
+        int value = 0;
+
         foreach (var line in File.ReadLines(filename))
         {
             var fields = line.Split(",");
-            seen.Add(fields[3].Trim());
 
-            foreach (var item in seen)
+            key = fields[3].Trim().ToString(); // Extract the new key for degrees in column 4
+
+            if (fields.Contains(key)) // Does the field contain the key? (e.g., "Bachelors")
             {
-                if (fields.Contains(item))
+                // If yes, get the value and parse it to integer
+                value = int.Parse(fields[4].Trim().ToString()); // Get the value or number of people who earned the degree (e.g., column 5)
+
+
+
+                if (!degrees.ContainsKey(key)) // if degrees does not contain the key yet, add it
                 {
-                    //degrees[fields[3].Trim()] += degrees[fields[4].Trim()];
 
-                    string key = degrees[item].ToString();
-                    int value = degrees[fields[4]];
+                    degrees.Add(key, value); // add the key and value to degrees dictionary
+                    degrees[key] = 1; // first time seeing this key value pair
+                }
+                else
+                {
+                    degrees[key]++;// Count the number of people who earned this degree
 
-                    degrees[key] = value;
 
-                    Console.WriteLine(String.Join(", ", degrees[key]));
                 }
 
+
+
+
+                //Debug.WriteLine(String.Join(", ", degrees));
             }
 
-
-            //degrees = int.Parse(degrees[earned]);
 
         }
 
@@ -158,8 +172,82 @@ public static class SetsAndMaps
     /// </summary>
     public static bool IsAnagram(string word1, string word2)
     {
-        // TODO Problem 3 - ADD YOUR CODE HERE
-        return false;
+
+        // Solve Anagrams problem 
+        // 1) Check if word sets, dict1 and dict2 are both equal in length. Before checking length, make sure to remove the spaces. 
+        // 2) Ignore cases by converting the two sets to lowercase 
+        // 3) Next, check if each letter from dict1 matches those letters found in dict2. Use Dictionary to test for membership. 
+        // Also, ensure the counts of each letter are the same. If this is not the case, then the two sets of words are not anagrams. 
+        // 4) If both sets contain the same amount of letters (although they show in a different order), return true, otherwise, return false.
+
+
+        // Remove spaces and convert to lowercase
+        var anagram1 = word1.Replace(" ", "").ToLower();
+        Debug.WriteLine(anagram1);
+        var anagram2 = word2.Replace(" ", "").ToLower();
+        Debug.WriteLine(anagram2);
+
+        // Check if the lengths are equal
+        if (anagram1.Length == anagram2.Length)
+        {
+            Debug.WriteLine("Both dictionaries have equal lengths");
+        }
+        else
+        {
+            Debug.WriteLine("Unequal lengths!");
+            return false;
+        }
+
+        var letters1 = new Dictionary<char, int>();
+        var letters2 = new Dictionary<char, int>();
+
+
+        foreach (char letter1 in anagram1)
+        {
+            if (!letters1.ContainsKey(letter1))
+            {
+                letters1[letter1] = 1; // Seen first time
+            }
+            else
+            {
+                letters1[letter1]++; // Count all instances of the letter found
+            }
+
+        }
+
+        foreach (char letter2 in anagram2)
+        {
+            if (!letters2.ContainsKey(letter2))
+            {
+                letters2[letter2] = 1; // Seen first time
+            }
+            else
+            {
+                letters2[letter2]++; // Count all instances of the letter found
+            }
+
+        }
+
+        foreach (var kvp in letters1) // find if the key in letters1 had a match with the key in letters2 OR 
+        // check if the key of letters2 did match the value of letters1
+        {
+            int cnt = 0;
+            if ((letters2.ContainsKey(kvp.Key) && letters2[kvp.Key] == kvp.Value) && cnt <= letters1.Count)
+            {
+                Debug.WriteLine($" Match found {kvp.Key} = {kvp.Value}");
+                cnt++;
+
+            }
+            else
+            {
+                return false; // Return false if even one instance of mismatched in the key and value pair was found
+            }
+        }
+
+
+        return true; // Otherwise, return true
+
+
     }
 
     /// <summary>
