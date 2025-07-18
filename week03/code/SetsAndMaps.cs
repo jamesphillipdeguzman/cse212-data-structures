@@ -1,5 +1,6 @@
 using System.Text.Json;
 using System.Diagnostics;
+using Microsoft.VisualStudio.TestPlatform.ObjectModel;
 
 public static class SetsAndMaps
 {
@@ -294,14 +295,15 @@ public static class SetsAndMaps
 
         //Debug.WriteLine($"{features.Properties.Place} - Mag {features.Properties.Mag}");
         // }
-
-
-        foreach (var feature in data.features)
+        
+        var summary = new HashSet<string>();
+        foreach (var feature in data.features) // Loop through the features array 
         {
-            var mag = feature.properties.mag;
-            var place = feature.properties.place;
+            var mag = feature.properties.mag; // Get the earthquakes' magnitude
+            var place = feature.properties.place; // Get the location or place 
+            summary.Add(place + " - Mag " + mag); // Add each data collected to summary
         }
 
-        return [];
+        return summary.ToArray(); // Output results as array
     }
 }
