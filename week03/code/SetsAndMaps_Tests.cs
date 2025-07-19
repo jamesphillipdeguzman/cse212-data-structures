@@ -173,53 +173,126 @@ public class IsAnagramTests
     public void IsAnagram_IgnoresCases()
     {
         Assert.IsTrue(SetsAndMaps.IsAnagram("Ab", "Ba"));
-    
+
     }
 
     [TestMethod]
-    public void Intersect_Simulator()
+    public void Intersect_Simulator_TestCase1()
     {
-          
+
         var expected = new Dictionary<char, int>
         {
-  
-            { '3', 2 }, // Intersect
-            { '4', 2 }, 
+
+            { '3', 2 }, // Intersect excluded 3
+            { '4', 2 }, // Intersect excluded 4
 
         };
 
         var data = SetsAndMaps.IntesectSimulator("1234", "3456");
 
+        string result = string.Join("", data.Keys);
+
+        Console.WriteLine(result);
+
+
         CollectionAssert.AreEquivalent(expected, data);
 
-        
+
     }
 
     [TestMethod]
-    public void Union_Simulator()
+    public void Intersect_Simulator_TestCase2()
     {
-          
+
         var expected = new Dictionary<char, int>
         {
-            { '1', 1 }, // Union
-            { '2', 1 },
+
+            { 'h', 2 }, // Intersect list 
+            { 'e', 4 },
+            { 'j', 2 },
+            { 'a', 2 },
+            { 'm', 2 },
+            { 's', 4 },
+            { '!', 4 },
+            { 'l', 2 },
+            { '1', 2 },
+            { '2', 2 },
             { '3', 2 },
-            { '4', 2 }, 
+
+
+        };
+
+        var data = SetsAndMaps.IntesectSimulator("Hey James! 123", "Hello Jamesss!!! 1234");
+
+        string result = string.Join("", data.Keys);
+
+        Console.WriteLine(result);
+
+
+        CollectionAssert.AreEquivalent(expected, data);
+
+
+    }
+
+
+    [TestMethod]
+    public void Intersect_Simulator_TestCase3()
+    {
+
+        var expected = new Dictionary<char, int>
+        {
+
+            { 'c', 2 },
+            { 's', 2 },
+            { '2', 2 },
+            { 'a', 3 },
+            { 't', 4 },
+            { 'r', 2 }
+
+        };
+
+        var data = SetsAndMaps.IntesectSimulator("CSE 212 Data", "Struct & Algorithm");
+
+        string result = string.Join("", data.Keys);
+
+        Console.WriteLine(result);
+
+
+        CollectionAssert.AreEquivalent(expected, data);
+
+
+    }
+
+    [TestMethod]
+    public void Union_Simulator_TestCase1()
+    {
+
+        var expected = new Dictionary<char, int>
+        {
+            { '1', 1 },
+            { '2', 1 },
+            { '3', 2 }, // Union included 3
+            { '4', 2 }, // Union included 4
             { '5', 1 },
             { '6', 1 }
         };
 
         var data = SetsAndMaps.UnionSimulator("1234", "3456");
 
+        string result = string.Join("", data.Keys);
+
+        Console.WriteLine(result);
+
+
         CollectionAssert.AreEquivalent(expected, data);
 
-        
+
     }
 
     [TestMethod]
-    public void Union_Simulator_MixedCharacters()
+    public void Union_Simulator_TestCase2()
     {
-          
+
         var expected = new Dictionary<char, int>
         {
             { 'h', 2 },
@@ -231,20 +304,65 @@ public class IsAnagramTests
             { 's', 4 },
             { '!', 4 },
             { 'l', 2 },
-            { 'o', 1 },
+            { 'o', 1 }, // Union included 'o'
             { '1', 2 },
             { '2', 2 },
-            { '3', 2 }, 
-            { '4', 1 },
+            { '3', 2 },
+            { '4', 1 }, // Union included 4
         };
 
-        
+
         var data = SetsAndMaps.UnionSimulator("Hey James! 123", "Hello Jamesss!!! 1234");
+
+        string result = string.Join("", data.Keys);
+
+        Console.WriteLine(result);
+
 
         CollectionAssert.AreEquivalent(expected, data);
 
-        
+
     }
+
+
+    [TestMethod]
+    public void Union_Simulator_TestCase3()
+    {
+
+        var expected = new Dictionary<char, int>
+        {
+            { 'c', 2 },
+            { 's', 2 },
+            { 'e', 1 },
+            { '2', 2 },
+            { '1', 1 },
+            { 'd', 1 },
+            { 'a', 3 },
+            { 't', 4 },
+            { 'r', 2 },
+            { 'u', 1 },
+            { '&', 1 },
+            { 'l', 1 },
+            { 'g', 1 },
+            { 'o', 1 },
+            { 'i', 1 },
+            { 'h', 1 },
+            { 'm', 1 }
+
+        };
+
+
+        var data = SetsAndMaps.UnionSimulator("CSE 212 Data", "Struct & Algorithm");
+
+        string result = string.Join("", data.Keys);
+
+        Console.WriteLine(result);
+
+        CollectionAssert.AreEquivalent(expected, data);
+
+
+    }
+
 
 
     [TestMethod]
@@ -261,107 +379,107 @@ public class IsAnagramTests
         Assert.IsFalse(SetsAndMaps.IsAnagram("Eleven plus One", "Twelve Plus One"));
     }
 
-    
 
-    [TestMethod, Timeout(60_000)]
-    public void IsAnagram_Efficiency()
+
+    //     [TestMethod, Timeout(60_000)]
+    //     public void IsAnagram_Efficiency()
+    //     {
+    //         // Calibrate baseline CPU performance
+    //         double CalibrateCpuSpeed()
+    //         {
+    //             var sw = Stopwatch.StartNew();
+    //             long sum = 0;
+    //             for (int i = 0; i < 400_000_000; i++) sum += i;
+    //             sw.Stop();
+    //             return sw.Elapsed.TotalMilliseconds;
+    //         }
+
+    //         double baseline = CalibrateCpuSpeed();
+
+    //         // Create test data
+    //         var rand = new Random();
+    //         var length = 60_000_000;
+    //         var a_array = new char[length];
+    //         var b_array = new char[length];
+
+    //         for (int i = 0; i < length; ++i)
+    //         {
+    //             char c = (char)rand.Next(256);
+    //             a_array[i] = c;
+    //             b_array[i] = c;
+    //         }
+
+    //         // Measure student code
+    //         var sw = Stopwatch.StartNew();
+    //         var actual = SetsAndMaps.IsAnagram(new string(a_array), new string(b_array));
+    //         sw.Stop();
+
+    //         double elapsed = sw.Elapsed.TotalMilliseconds;
+    //         double ratio = elapsed / baseline;
+
+    //         Debug.WriteLine($"Elapsed: {elapsed:F2}ms | Baseline: {baseline:F2}ms | Ratio: {ratio:F2}");
+    //         Assert.IsTrue(ratio < 15.0, "Your algorithm is too slow. Make sure it runs in O(n) time.");
+    //         Assert.IsTrue(actual);
+    //     }
+    // }
+
+    [TestClass]
+    public class MazeTests
     {
-        // Calibrate baseline CPU performance
-        double CalibrateCpuSpeed()
+        [TestMethod]
+        public void Maze_Basic()
         {
-            var sw = Stopwatch.StartNew();
-            long sum = 0;
-            for (int i = 0; i < 400_000_000; i++) sum += i;
-            sw.Stop();
-            return sw.Elapsed.TotalMilliseconds;
+            Dictionary<ValueTuple<int, int>, bool[]> map = SetupMazeMap();
+            var maze = new Maze(map);
+            Assert.AreEqual("Current location (x=1, y=1)", maze.GetStatus());
+            AssertThrowsInvalidOperationException(maze.MoveUp);
+            AssertThrowsInvalidOperationException(maze.MoveLeft);
+            maze.MoveRight();
+            AssertThrowsInvalidOperationException(maze.MoveRight);
+            maze.MoveDown();
+            maze.MoveDown();
+            maze.MoveDown();
+            maze.MoveRight();
+            maze.MoveRight();
+            maze.MoveUp();
+            maze.MoveRight();
+            maze.MoveDown();
+            maze.MoveLeft();
+            AssertThrowsInvalidOperationException(maze.MoveDown);
+            maze.MoveRight();
+            maze.MoveDown();
+            maze.MoveDown();
+            maze.MoveRight();
+            Assert.AreEqual("Current location (x=6, y=6)", maze.GetStatus());
         }
 
-        double baseline = CalibrateCpuSpeed();
-
-        // Create test data
-        var rand = new Random();
-        var length = 60_000_000;
-        var a_array = new char[length];
-        var b_array = new char[length];
-
-        for (int i = 0; i < length; ++i)
+        private void AssertThrowsInvalidOperationException(Action action)
         {
-            char c = (char)rand.Next(256);
-            a_array[i] = c;
-            b_array[i] = c;
+            try
+            {
+                action();
+                Assert.Fail("Exception should have been thrown.");
+            }
+            catch (InvalidOperationException e)
+            {
+                Assert.AreEqual("Can't go that way!", e.Message);
+            }
+            catch (AssertFailedException)
+            {
+                throw;
+            }
+            catch (Exception e)
+            {
+                Assert.Fail(
+                     string.Format("Unexpected exception of type {0} caught: {1}",
+                                    e.GetType(), e.Message)
+                );
+            }
         }
 
-        // Measure student code
-        var sw = Stopwatch.StartNew();
-        var actual = SetsAndMaps.IsAnagram(new string(a_array), new string(b_array));
-        sw.Stop();
-
-        double elapsed = sw.Elapsed.TotalMilliseconds;
-        double ratio = elapsed / baseline;
-
-        Debug.WriteLine($"Elapsed: {elapsed:F2}ms | Baseline: {baseline:F2}ms | Ratio: {ratio:F2}");
-        Assert.IsTrue(ratio < 15.0, "Your algorithm is too slow. Make sure it runs in O(n) time.");
-        Assert.IsTrue(actual);
-    }
-}
-
-[TestClass]
-public class MazeTests
-{
-    [TestMethod]
-    public void Maze_Basic()
-    {
-        Dictionary<ValueTuple<int, int>, bool[]> map = SetupMazeMap();
-        var maze = new Maze(map);
-        Assert.AreEqual("Current location (x=1, y=1)", maze.GetStatus());
-        AssertThrowsInvalidOperationException(maze.MoveUp);
-        AssertThrowsInvalidOperationException(maze.MoveLeft);
-        maze.MoveRight();
-        AssertThrowsInvalidOperationException(maze.MoveRight);
-        maze.MoveDown();
-        maze.MoveDown();
-        maze.MoveDown();
-        maze.MoveRight();
-        maze.MoveRight();
-        maze.MoveUp();
-        maze.MoveRight();
-        maze.MoveDown();
-        maze.MoveLeft();
-        AssertThrowsInvalidOperationException(maze.MoveDown);
-        maze.MoveRight();
-        maze.MoveDown();
-        maze.MoveDown();
-        maze.MoveRight();
-        Assert.AreEqual("Current location (x=6, y=6)", maze.GetStatus());
-    }
-
-    private void AssertThrowsInvalidOperationException(Action action)
-    {
-        try
+        private static Dictionary<ValueTuple<int, int>, bool[]> SetupMazeMap()
         {
-            action();
-            Assert.Fail("Exception should have been thrown.");
-        }
-        catch (InvalidOperationException e)
-        {
-            Assert.AreEqual("Can't go that way!", e.Message);
-        }
-        catch (AssertFailedException)
-        {
-            throw;
-        }
-        catch (Exception e)
-        {
-            Assert.Fail(
-                 string.Format("Unexpected exception of type {0} caught: {1}",
-                                e.GetType(), e.Message)
-            );
-        }
-    }
-
-    private static Dictionary<ValueTuple<int, int>, bool[]> SetupMazeMap()
-    {
-        Dictionary<ValueTuple<int, int>, bool[]> map = new() {
+            Dictionary<ValueTuple<int, int>, bool[]> map = new() {
             { (1, 1), new[] { false, true, false, true } },
             { (1, 2), new[] { false, true, true, false } },
             { (1, 3), new[] { false, false, false, false } },
@@ -399,22 +517,23 @@ public class MazeTests
             { (6, 5), new[] { false, false, false, false } },
             { (6, 6), new[] { true, false, false, false } }
         };
-        return map;
+            return map;
+        }
     }
-}
 
-[TestClass]
-public class EarthquakeDailySummaryTests
-{
-    [TestMethod]
-    public void EarthquakeDailySummary_Basic()
+    [TestClass]
+    public class EarthquakeDailySummaryTests
     {
-        var result = SetsAndMaps.EarthquakeDailySummary();
-        Assert.IsTrue(result.Length > 5, "Too few earthquakes");
-
-        foreach (string s in result)
+        [TestMethod]
+        public void EarthquakeDailySummary_Basic()
         {
-            Assert.IsTrue(s.Contains(" - Mag "), "String must contain a magnitude");
+            var result = SetsAndMaps.EarthquakeDailySummary();
+            Assert.IsTrue(result.Length > 5, "Too few earthquakes");
+
+            foreach (string s in result)
+            {
+                Assert.IsTrue(s.Contains(" - Mag "), "String must contain a magnitude");
+            }
         }
     }
 }

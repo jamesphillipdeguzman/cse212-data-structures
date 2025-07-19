@@ -240,12 +240,12 @@ public static class SetsAndMaps
             {
                 Debug.WriteLine($" Match found {kvp.Key} = {kvp.Value}");
                 cnt++;
-        
+
 
             }
             else
             {
-                
+
                 return false; // Return false if even one instance of mismatched in the key and value pair was found
             }
         }
@@ -255,7 +255,7 @@ public static class SetsAndMaps
 
 
     }
-    
+
     public static Dictionary<char, int> IntesectSimulator(string text1, string text2)
     {
         // <summary>
@@ -307,17 +307,17 @@ public static class SetsAndMaps
             }
         }
 
-        
-        
+
+
         var results = new Dictionary<char, int>();
         // Loop through each key-value pairs (or kvp) in combined 
-        foreach (var kvp in combined) 
+        foreach (var kvp in combined)
         {
             // Chek if kvp value is greater than 1 (it means a dupe was found)
             if (((kvp.Value) > 1))
             {
                 Debug.WriteLine($" Duplicate found {kvp.Key} = {kvp.Value}");
-              
+
                 dupes.Add(kvp.Key, kvp.Value); // Filter only duplicates in the string of text (e.g., simulates Intersect)
                 results.Add(kvp.Key, kvp.Value); // Capture all unique keys regardless of value (e.g. simulates Union)
 
@@ -329,13 +329,13 @@ public static class SetsAndMaps
                 results.Add(kvp.Key, kvp.Value); // Capture all unique keys regardless of value 
             }
         }
-        
+
 
         Debug.WriteLine(string.Join(", ", dupes)); // Dupes is where the two text strings intersects
 
-        Debug.WriteLine(string.Join(", ", unique)); 
-             
-        return dupes; 
+        Debug.WriteLine(string.Join(", ", unique));
+
+        return dupes;
 
     }
 
@@ -390,17 +390,17 @@ public static class SetsAndMaps
             }
         }
 
-        
+
 
         var results = new Dictionary<char, int>();
         // Loop through each key-value pairs (or kvp) in combined 
-        foreach (var kvp in combined) 
+        foreach (var kvp in combined)
         {
             // Chek if kvp value is greater than 1 (it means a dupe was found)
             if (((kvp.Value) > 1))
             {
                 Debug.WriteLine($" Duplicate found {kvp.Key} = {kvp.Value}");
-              
+
                 dupes.Add(kvp.Key, kvp.Value); // Filter only duplicates in the string of text (e.g., simulates Intersect)
                 results.Add(kvp.Key, kvp.Value); // Capture all unique keys regardless of value (e.g. simulates Union)
 
@@ -412,13 +412,16 @@ public static class SetsAndMaps
                 results.Add(kvp.Key, kvp.Value); // Capture all unique keys regardless of value 
             }
         }
-        
+
 
         Debug.WriteLine(string.Join(", ", dupes)); // Dupes is where the two text strings intersects
 
-        Debug.WriteLine(string.Join(", ", unique)); 
-             
-        return results; 
+        Debug.WriteLine(string.Join(", ", unique));
+
+        Debug.WriteLine(string.Join(", ", results));
+
+
+        return results;
 
     }
 
