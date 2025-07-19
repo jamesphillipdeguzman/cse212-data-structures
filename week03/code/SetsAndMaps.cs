@@ -229,18 +229,23 @@ public static class SetsAndMaps
 
         }
 
-        foreach (var kvp in letters1) // find if the key in letters1 had a match with the key in letters2 OR 
-        // check if the key of letters2 did match the value of letters1
+        foreach (var kvp in letters1) // Loop through each key-value pairs (kvp) in letters1 
+        // and take its key and compare if this key exists in letters2; also, compare its value to match to the key-value pair
         {
             int cnt = 0;
+
+            // Find if the key in letters1 had a match with the key in letters2 AND 
+            // Check if the key of letters2 did match the value of letters1
             if ((letters2.ContainsKey(kvp.Key) && letters2[kvp.Key] == kvp.Value) && cnt <= letters1.Count)
             {
                 Debug.WriteLine($" Match found {kvp.Key} = {kvp.Value}");
                 cnt++;
+        
 
             }
             else
             {
+                
                 return false; // Return false if even one instance of mismatched in the key and value pair was found
             }
         }
@@ -250,6 +255,173 @@ public static class SetsAndMaps
 
 
     }
+    
+    public static Dictionary<char, int> IntesectSimulator(string text1, string text2)
+    {
+        // <summary>
+        // Solve Intersect Simulator problem (REMINDER: Create your own Intersect function)
+        // 1) Remove spaces in both text1 and text2
+        // 2) Ignore cases by converting the two inputs to lowercase 
+        // 3) Next, check if each character in combination is either a dupe or unique 
+        // 4) Duplicates is determined by checking for the value of the key (e.g., greater than 1 is a dupe already)
+        //    This simulates the <Intersect> function in Sets.
+        // 5) Those with a value of 1 are considered unique characters.
+        // 6) Results variable will save every character and remove any duplicates (simulates <Union> in Sets)
+        // </summary>
+
+        // Remove spaces and convert to lowercase
+        var input1 = text1.Replace(" ", "").ToLower();
+        Debug.WriteLine(input1);
+        var input2 = text2.Replace(" ", "").ToLower();
+        Debug.WriteLine(input2);
+
+        var combinedText = text1 + text2;
+
+        var combination = combinedText.Replace(" ", "").ToLower();
+
+        // Check if the lengths are equal
+        if (input1.Length == input2.Length)
+        {
+            Debug.WriteLine("Both inputs have equal lengths");
+        }
+        else
+        {
+            Debug.WriteLine("Unequal lengths!");
+
+        }
+
+        // Create a dictionary for unique, duplicates and combined
+        var unique = new Dictionary<char, int>();
+        var dupes = new Dictionary<char, int>();
+        var combined = new Dictionary<char, int>();
+
+        foreach (char c in combination) // Loop each character in the combination string
+        {
+            if (!combined.ContainsKey(c))
+            {
+                combined[c] = 1;  // First time seeing the character
+            }
+            else
+            {
+                combined[c]++;  // Count all instances of character
+            }
+        }
+
+        
+        
+        var results = new Dictionary<char, int>();
+        // Loop through each key-value pairs (or kvp) in combined 
+        foreach (var kvp in combined) 
+        {
+            // Chek if kvp value is greater than 1 (it means a dupe was found)
+            if (((kvp.Value) > 1))
+            {
+                Debug.WriteLine($" Duplicate found {kvp.Key} = {kvp.Value}");
+              
+                dupes.Add(kvp.Key, kvp.Value); // Filter only duplicates in the string of text (e.g., simulates Intersect)
+                results.Add(kvp.Key, kvp.Value); // Capture all unique keys regardless of value (e.g. simulates Union)
+
+
+            }
+            else
+            {
+                unique.Add(kvp.Key, kvp.Value); // Filter whatever is distince in the string of text 
+                results.Add(kvp.Key, kvp.Value); // Capture all unique keys regardless of value 
+            }
+        }
+        
+
+        Debug.WriteLine(string.Join(", ", dupes)); // Dupes is where the two text strings intersects
+
+        Debug.WriteLine(string.Join(", ", unique)); 
+             
+        return dupes; 
+
+    }
+
+    public static Dictionary<char, int> UnionSimulator(string text1, string text2)
+    {
+        // <summary>
+        // Solve Union Simulator problem (REMINDER: Create your own Union function)
+        // 1) Remove spaces in both text1 and text2
+        // 2) Ignore cases by converting the two inputs to lowercase 
+        // 3) Next, check if each character in combination is either a dupe or unique 
+        // 4) Duplicates is determined by checking for the value of the key (e.g., greater than 1 is a dupe already)
+        //    This simulates the <Intersect> function in Sets.
+        // 5) Those with a value of 1 are considered unique characters.
+        // 6) Results variable will save every character and remove any duplicates (simulates <Union> in Sets)
+        // </summary>
+
+        // Remove spaces and convert to lowercase
+        var input1 = text1.Replace(" ", "").ToLower();
+        Debug.WriteLine(input1);
+        var input2 = text2.Replace(" ", "").ToLower();
+        Debug.WriteLine(input2);
+
+        var combinedText = text1 + text2;
+
+        var combination = combinedText.Replace(" ", "").ToLower();
+
+        // Check if the lengths are equal
+        if (input1.Length == input2.Length)
+        {
+            Debug.WriteLine("Both inputs have equal lengths");
+        }
+        else
+        {
+            Debug.WriteLine("Unequal lengths!");
+
+        }
+
+        // Create a dictionary for unique, duplicates and combined
+        var unique = new Dictionary<char, int>();
+        var dupes = new Dictionary<char, int>();
+        var combined = new Dictionary<char, int>();
+
+        foreach (char c in combination) // Loop each character in the combination string
+        {
+            if (!combined.ContainsKey(c))
+            {
+                combined[c] = 1;  // First time seeing the character
+            }
+            else
+            {
+                combined[c]++;  // Count all instances of character
+            }
+        }
+
+        
+
+        var results = new Dictionary<char, int>();
+        // Loop through each key-value pairs (or kvp) in combined 
+        foreach (var kvp in combined) 
+        {
+            // Chek if kvp value is greater than 1 (it means a dupe was found)
+            if (((kvp.Value) > 1))
+            {
+                Debug.WriteLine($" Duplicate found {kvp.Key} = {kvp.Value}");
+              
+                dupes.Add(kvp.Key, kvp.Value); // Filter only duplicates in the string of text (e.g., simulates Intersect)
+                results.Add(kvp.Key, kvp.Value); // Capture all unique keys regardless of value (e.g. simulates Union)
+
+
+            }
+            else
+            {
+                unique.Add(kvp.Key, kvp.Value); // Filter whatever is distince in the string of text 
+                results.Add(kvp.Key, kvp.Value); // Capture all unique keys regardless of value 
+            }
+        }
+        
+
+        Debug.WriteLine(string.Join(", ", dupes)); // Dupes is where the two text strings intersects
+
+        Debug.WriteLine(string.Join(", ", unique)); 
+             
+        return results; 
+
+    }
+
 
     /// <summary>
     /// This function will read JSON (Javascript Object Notation) data from the 
@@ -295,7 +467,7 @@ public static class SetsAndMaps
 
         //Debug.WriteLine($"{features.Properties.Place} - Mag {features.Properties.Mag}");
         // }
-        
+
         var summary = new HashSet<string>();
         foreach (var feature in data.features) // Loop through the features array 
         {

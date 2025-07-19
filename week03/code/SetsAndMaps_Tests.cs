@@ -173,7 +173,79 @@ public class IsAnagramTests
     public void IsAnagram_IgnoresCases()
     {
         Assert.IsTrue(SetsAndMaps.IsAnagram("Ab", "Ba"));
+    
     }
+
+    [TestMethod]
+    public void Intersect_Simulator()
+    {
+          
+        var expected = new Dictionary<char, int>
+        {
+  
+            { '3', 2 }, // Intersect
+            { '4', 2 }, 
+
+        };
+
+        var data = SetsAndMaps.IntesectSimulator("1234", "3456");
+
+        CollectionAssert.AreEquivalent(expected, data);
+
+        
+    }
+
+    [TestMethod]
+    public void Union_Simulator()
+    {
+          
+        var expected = new Dictionary<char, int>
+        {
+            { '1', 1 }, // Union
+            { '2', 1 },
+            { '3', 2 },
+            { '4', 2 }, 
+            { '5', 1 },
+            { '6', 1 }
+        };
+
+        var data = SetsAndMaps.UnionSimulator("1234", "3456");
+
+        CollectionAssert.AreEquivalent(expected, data);
+
+        
+    }
+
+    [TestMethod]
+    public void Union_Simulator_MixedCharacters()
+    {
+          
+        var expected = new Dictionary<char, int>
+        {
+            { 'h', 2 },
+            { 'e', 4 },
+            { 'y', 1 },
+            { 'j', 2 },
+            { 'a', 2 },
+            { 'm', 2 },
+            { 's', 4 },
+            { '!', 4 },
+            { 'l', 2 },
+            { 'o', 1 },
+            { '1', 2 },
+            { '2', 2 },
+            { '3', 2 }, 
+            { '4', 1 },
+        };
+
+        
+        var data = SetsAndMaps.UnionSimulator("Hey James! 123", "Hello Jamesss!!! 1234");
+
+        CollectionAssert.AreEquivalent(expected, data);
+
+        
+    }
+
 
     [TestMethod]
     public void IsAnagram_IgnoresSpaces()
@@ -188,6 +260,8 @@ public class IsAnagramTests
         Assert.IsTrue(SetsAndMaps.IsAnagram("Eleven plus Two", "Twelve Plus One"));
         Assert.IsFalse(SetsAndMaps.IsAnagram("Eleven plus One", "Twelve Plus One"));
     }
+
+    
 
     [TestMethod, Timeout(60_000)]
     public void IsAnagram_Efficiency()
