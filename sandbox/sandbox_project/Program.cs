@@ -230,15 +230,34 @@ public class Program
 
         //         return (float)stack.Pop();
 
-        var setA = new List<int> { 1, 2, 3, 4 };
-        var setB = new List<int> { 3, 4, 5, 6 };
+        // Example of using Intersect / Union in List
+
+        var listA = new List<int> { 1, 2, 3, 4 };
+        var listB = new List<int> { 3, 4, 5, 6 };
 
         // Intersection: common elements
-        var intersection = setA.Intersect(setB);
-        Console.WriteLine("Intersection: " + string.Join(", ", intersection));
+        var intersection_1 = listA.Intersect(listB);
+        Console.WriteLine("Intersection: " + string.Join(", ", intersection_1));
 
         // Union: all unique elements
-        var union = setA.Union(setB);
+        var union = listA.Union(listB);
         Console.WriteLine("Union: " + string.Join(", ", union));
+
+
+        // Example of using Intersect / Union in HashSet@!!
+
+        var setA = new HashSet<int> { 1, 2, 3, 4 };
+        var setB = new HashSet<int> { 3, 4, 5, 6 };
+
+        // Create copies to preserve original sets
+        var intersection_2 = new HashSet<int>(setA);
+        intersection_2.IntersectWith(setB);
+        Console.WriteLine("Intersection: " + string.Join(", ", intersection_2));
+
+        var union_2 = new HashSet<int>(setA);
+        union_2.UnionWith(setB);
+        Console.WriteLine("Union: " + string.Join(", ", union_2));
+
+
     }
- }
+}
