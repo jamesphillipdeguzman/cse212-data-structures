@@ -33,6 +33,23 @@ public class LinkedList : IEnumerable<int>
     public void InsertTail(int value)
     {
         // TODO Problem 1
+        // Create new node
+        Node newNode = new(value);
+        // If the list is empty, then point both head and tail to the new node.
+        if (_head is null)
+        {
+            _head = newNode;
+            _tail = newNode;
+        }
+         // If the list is not empty, then only tail will be affected.
+        else
+        {
+            newNode.Prev = _tail; // Connect previous node to the current tail
+            _tail.Next = newNode; // Connect the next of the current tail to the new node
+            _tail = newNode; // Update the tail to point to the new node
+        }
+
+
     }
 
 
@@ -65,6 +82,21 @@ public class LinkedList : IEnumerable<int>
     public void RemoveTail()
     {
         // TODO Problem 2
+         // If the list has only one item in it, then set head and tail 
+        // to null resulting in an empty list.  This condition will also
+        // cover an empty list.  Its okay to set to null again.
+        if (_head == _tail)
+        {
+            _head = null;
+            _tail = null;
+        }
+        // If the list has more than one item in it, then only the tail
+        // will be affected.
+        else if (_tail is not null)
+        {
+            _tail.Prev!.Next = null; // Disconnect the second node to last node to nothing
+            _tail = _tail.Prev; // Update the tail to point to the second to last node
+        }
     }
 
     /// <summary>
@@ -109,6 +141,50 @@ public class LinkedList : IEnumerable<int>
     public void Remove(int value)
     {
         // TODO Problem 3
+        // If the list has only one item in it, then set head and tail 
+        // to null resulting in an empty list.  This condition will also
+        // cover an empty list.  Its okay to set to null again.
+        if (_head == _tail)
+        {
+            _head = null;
+            _tail = null;
+        }
+        // If the list has more than one item in it, then only the head
+        // will be affected.
+        //Node? nodeToRemove = new(value);
+        Node? curr = _head;
+        // if (_tail == null)
+        // {
+        //     _tail.Prev!.Next = null; // Disconnect the second node to last node to nothing
+        //     _tail = _tail.Prev; // Update the tail to point to the second to last node
+        // }
+        while (curr != null)
+        {
+            if (curr.Data == value && curr.Next != null)  // Once match found for removeNode, proceed with deletion
+            {
+                curr.Next!.Prev = curr.Prev;
+
+                curr.Prev!.Next = curr.Next;
+                return;
+
+            }
+            else if (curr.Next == null)
+            {
+                curr.Prev!.Next = null; // Disconnect the second node to last node to nothing
+                _tail = curr.Prev; // Update the tail to point to the second to last node
+                return;
+            }
+            else
+            {
+                curr = curr.Next; // Update the head to point to the second node
+            }
+
+            
+        }
+
+             
+
+       
     }
 
     /// <summary>
