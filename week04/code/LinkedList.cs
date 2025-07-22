@@ -193,6 +193,17 @@ public class LinkedList : IEnumerable<int>
     public void Replace(int oldValue, int newValue)
     {
         // TODO Problem 4
+        Node? old = new(oldValue);
+        var curr = _head;
+        while (curr != old && curr != null) // Check if current node is not equal to the old node
+        {
+            if (curr.Data == old.Data) // Check if the current and old value are equal
+            {
+                curr.Data = newValue; // Set the new value to the current node
+            }
+            curr = curr!.Next;  // Go to the next node (left to right or forward traversal)
+        }
+        return;
     }
 
     /// <summary>
