@@ -234,7 +234,14 @@ public class LinkedList : IEnumerable<int>
     public IEnumerable Reverse()
     {
         // TODO Problem 5
-        yield return 0; // replace this line with the correct yield return statement(s)
+        var curr = _tail; // start from the tail
+        while (curr != null)
+        {
+            yield return curr.Data; // replace this line with the correct yield return statement(s)
+            curr = curr.Prev; // Go backward in the linked list
+        }
+
+        
     }
 
     public override string ToString()
