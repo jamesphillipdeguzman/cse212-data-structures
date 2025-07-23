@@ -174,6 +174,10 @@ public class LinkedList : IEnumerable<int>
                 _tail = curr.Prev; // Update the tail to point to the second to last node
                 return;
             }
+            else if (value < 0)
+            {
+                return;
+            }
             else
             {
                 curr = curr.Next; // Update the head to point to the second node
