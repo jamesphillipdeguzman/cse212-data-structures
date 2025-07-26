@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Diagnostics;
 
 public static class Recursion
 {
@@ -14,8 +15,24 @@ public static class Recursion
     /// </summary>
     public static int SumSquaresRecursive(int n)
     {
+     
+        var result = 0;
+        var temp = 0;
         // TODO Start Problem 1
-        return 0;
+        Debug.WriteLine("Entering recursion here");
+        if (n <= 0)
+        {
+            Debug.WriteLine("Base case returned 0");
+            return 0;
+        }
+
+        temp = (int)Math.Pow(n, 2);       
+        result = temp += SumSquaresRecursive(n - 1);
+         
+        Debug.WriteLine($"Returning n = {n} with value {temp} ");
+        //result += temp;
+        return result;
+        
     }
 
     /// <summary>
