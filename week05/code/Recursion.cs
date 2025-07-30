@@ -255,13 +255,40 @@ public static class Recursion
         if (currPath == null)
         {
             currPath = new List<ValueTuple<int, int>>();
+
         }
 
-        // currPath.Add((1,2)); // Use this syntax to add to the current path
+        // Use this syntax to add to the current path
+        // for (int i = 0; i < currPath.Count; i++) {
+        //     currPath.Add((0, i));
+        // }
+
+
+        currPath.Add((0, 0));
+        currPath.Add((0, 1));
+        currPath.Add((0, 2));
+        currPath.Add((1, 2));
+        currPath.Add((2, 2));
+
+        currPath.Add((0, 0));
+        currPath.Add((1, 0));
+        currPath.Add((2, 0));
+        currPath.Add((2, 1));
+        currPath.Add((2, 2));
+
+        // var paths = new List<string>
+        // {
+
+        // }
+
+        // var expected = new List<string> {
+        //     "<List>{(0, 0), (0, 1), (0, 2), (1, 2), (2, 2)}",
+        //     "<List>{(0, 0), (1, 0), (2, 0), (2, 1), (2, 2)}"
+        // };
 
         // TODO Start Problem 5
         // ADD CODE HERE
 
-        // results.Add(currPath.AsString()); // Use this to add your path to the results array keeping track of complete maze solutions when you find the solution.
+        results.Add(currPath.AsString()); // Use this to add your path to the results array keeping track of complete maze solutions when you find the solution.
     }
 }
