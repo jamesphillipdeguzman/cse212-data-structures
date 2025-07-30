@@ -167,7 +167,82 @@ public static class Recursion
     public static void WildcardBinary(string pattern, List<string> results)
     {
         // TODO Start Problem 4
+        Debug.WriteLine(".::WildcardBinary Problem::.");
+        Debug.WriteLine(pattern);
+        // Find the position of the placeholder (*) from the pattern using IndexOf 
+        // int wildchar = pattern.IndexOf('*');
+        // Console.WriteLine(wildchar); 
+        //var patlen = pattern.Length - 1; // //Console.WriteLine(patlen); 
+        // var bin = new List<char>();
+        // var asterisk = '*'; 
+        // 
+        // foreach (char w in pattern)
+        // {
+        //     if (w != '*')
+        //     {
+        //         bin.Add(w);
+        //     }
+        //     else
+        //     {
+        //         bin.Add('*');
+        //     }
+
+        // }
+
+        // //Console.WriteLine($"{dict.Key} - {dict.Value}"); 
+        //  Console.WriteLine(string.Join(", ", w)); 
+        var firstIndex = pattern.IndexOf('*');
+        Debug.WriteLine(firstIndex);
+        var secondIndex = pattern.IndexOf('*', firstIndex + 1);
+        Debug.WriteLine(secondIndex);
+        var thirdIndex = pattern.IndexOf('*', secondIndex + 1);
+        Debug.WriteLine(thirdIndex);
+
+        // Create copy of pattern 
+        //var list = new List<string>(pattern);
+        // Print new list 
+        Debug.WriteLine(string.Join("", pattern));
+
+        // Print character at first index 
+        Debug.WriteLine(pattern[firstIndex]);
+        // Create new reference to firstIndex (i.e., pos1) 
+        var pos1 = pattern[firstIndex];
+        Debug.WriteLine(pos1);
+        string removed = "";
+        string replaced = "";
+
+        foreach (char c in pattern)
+        {
+            Debug.WriteLine(c.ToString());
+            if (c == '*')
+            {
+                //Console.WriteLine("hit!"); 
+                removed = pattern.Remove(firstIndex, 1);
+                replaced = removed.Insert(firstIndex, "1");
+            }
+
+            return;
+
+        }
+        Debug.WriteLine(removed);
+        Debug.WriteLine(replaced);
+
     }
+    // Check if pos1 is equal to the wild character asterisk 
+    //if (pos1 == '*') {
+    // remove and replace the asterisk 
+    //list.Remove();
+    //var newPattern = list.GetRange(0, firstIndex);
+    //Console.WriteLine(newPattern); 
+    // //Console.WriteLine(string.Join("", list.GetRange(0, firstIndex))); 
+    //  } 
+    // for (int i = 0; i < pattern.Length; i++) { 
+    // if (pattern[i] == '*') { 
+    // } 
+    // } 
+    // return WildBinary; } 
+    //}
+
 
     /// <summary>
     /// Use recursion to insert all paths that start at (0,0) and end at the
