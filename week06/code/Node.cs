@@ -12,6 +12,11 @@ public class Node
     public void Insert(int value)
     {
         // TODO Start Problem 1
+        // If the value is the same as the root then just skip it...
+        if (value == Data)
+        {
+            return; // Ignore duplicates and exit right away
+        }
 
         if (value < Data)
         {
