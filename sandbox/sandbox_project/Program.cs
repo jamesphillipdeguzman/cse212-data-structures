@@ -7,6 +7,15 @@ public class Program
 {
     static void Main(string[] args)
     {
+
+        BinaryTree tree = new BinaryTree();
+
+        tree.Insert(5);
+        tree.Insert(3);
+        tree.Insert(7);
+        tree.Insert(4);
+
+        tree.PrintInOrder();
         // This project is here for you to use as a "Sandbox" to play around
         // with any code or ideas you have that do not directly apply to
         // one of your projects.
@@ -232,32 +241,92 @@ public class Program
 
         // Example of using Intersect / Union in List
 
-        var listA = new List<int> { 1, 2, 3, 4 };
-        var listB = new List<int> { 3, 4, 5, 6 };
+        // var listA = new List<int> { 1, 2, 3, 4 };
+        // var listB = new List<int> { 3, 4, 5, 6 };
 
-        // Intersection: common elements
-        var intersection_1 = listA.Intersect(listB);
-        Console.WriteLine("Intersection: " + string.Join(", ", intersection_1));
+        // // Intersection: common elements
+        // var intersection_1 = listA.Intersect(listB);
+        // Console.WriteLine("Intersection: " + string.Join(", ", intersection_1));
 
-        // Union: all unique elements
-        var union = listA.Union(listB);
-        Console.WriteLine("Union: " + string.Join(", ", union));
+        // // Union: all unique elements
+        // var union = listA.Union(listB);
+        // Console.WriteLine("Union: " + string.Join(", ", union));
 
 
-        // Example of using Intersect / Union in HashSet@!!
+        // // Example of using Intersect / Union in HashSet@!!
 
-        var setA = new HashSet<int> { 1, 2, 3, 4 };
-        var setB = new HashSet<int> { 3, 4, 5, 6 };
+        // var setA = new HashSet<int> { 1, 2, 3, 4 };
+        // var setB = new HashSet<int> { 3, 4, 5, 6 };
 
-        // Create copies to preserve original sets
-        var intersection_2 = new HashSet<int>(setA);
-        intersection_2.IntersectWith(setB);
-        Console.WriteLine("Intersection: " + string.Join(", ", intersection_2));
+        // // Create copies to preserve original sets
+        // var intersection_2 = new HashSet<int>(setA);
+        // intersection_2.IntersectWith(setB);
+        // Console.WriteLine("Intersection: " + string.Join(", ", intersection_2));
 
-        var union_2 = new HashSet<int>(setA);
-        union_2.UnionWith(setB);
-        Console.WriteLine("Union: " + string.Join(", ", union_2));
+        // var union_2 = new HashSet<int>(setA);
+        // union_2.UnionWith(setB);
+        // Console.WriteLine("Union: " + string.Join(", ", union_2));
 
 
     }
+
+
+    public class Node
+    {
+        public int Value;
+        public Node Left;
+        public Node Right;
+
+        public Node(int value)
+        {
+            Value = value;
+            Left = null;
+            Right = null;
+        }
+    }
+
+    public class BinaryTree
+    {
+        public Node Root;
+
+        public void Insert(int value)
+        {
+            Root = InsertRecursively(Root, value);
+        }
+
+        private Node InsertRecursively(Node root, int value)
+        {
+            if (root == null)
+            {
+                return new Node(value);
+            }
+
+            if (value < root.Value)
+            {
+                root.Left = InsertRecursively(root.Left, value);
+            }
+            else if (value > root.Value)
+            {
+                root.Right = InsertRecursively(root.Right, value);
+            }
+
+            return root;
+        }
+
+        public void PrintInOrder()
+        {
+            InOrderTraversal(Root);
+        }
+
+        private void InOrderTraversal(Node node)
+        {
+            if (node == null) return;
+
+            InOrderTraversal(node.Left);
+            Console.WriteLine(node.Value);
+            InOrderTraversal(node.Right);
+        }
+    }
+
+
 }
