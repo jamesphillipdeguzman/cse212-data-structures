@@ -36,15 +36,42 @@ public class Node
         }
     }
 
-    public bool Contains(int value)
+    public bool Contains(Node? root, int value)
     {
-        // TODO Start Problem 2
-        return false;
+        //Node root = new(Data);
+        //Right = new Node(value);
+        //Left = new Node(value);
+        if (root.Data == null || (root.Left == null || root.Right == null))
+            return false;
+
+        if (value < root.Data && root.Left != null)
+
+            return Contains(root.Left, value);
+        else if (value > root.Data && root.Right != null)
+            return Contains(root.Right, value);
+        else
+            return true;
+
+        // if (Data == value)
+        // {
+        //     return true;
+        // }
+        // else if (Right is not null && Right.Data == value)
+        // {
+        //     return true;
+        // }
+        // else if (Left is not null && Left.Data == value)
+        // {
+        //     return true;
+        // }
+
+        //return Contains(value);
     }
 
     public int GetHeight()
     {
         // TODO Start Problem 4
+
         return 0; // Replace this line with the correct return statement(s)
     }
 }

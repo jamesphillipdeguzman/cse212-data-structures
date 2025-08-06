@@ -30,7 +30,7 @@ public class BinarySearchTree : IEnumerable<int>
     /// <returns>true if found, otherwise false</returns>
     public bool Contains(int value)
     {
-        return _root != null && _root.Contains(value);
+        return _root != null && _root.Contains(_root, value);
     }
 
     /// <summary>
@@ -99,8 +99,10 @@ public class BinarySearchTree : IEnumerable<int>
     }
 }
 
-public static class IntArrayExtensionMethods {
-    public static string AsString(this IEnumerable array) {
+public static class IntArrayExtensionMethods
+{
+    public static string AsString(this IEnumerable array)
+    {
         return "<IEnumerable>{" + string.Join(", ", array.Cast<int>()) + "}";
     }
 }
