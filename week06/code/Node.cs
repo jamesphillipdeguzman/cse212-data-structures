@@ -38,34 +38,35 @@ public class Node
 
     public bool Contains(Node? root, int value)
     {
-        //Node root = new(Data);
-        //Right = new Node(value);
-        //Left = new Node(value);
-        if (root.Data == null || (root.Left == null || root.Right == null))
+        // If parent node is empty then return false
+        if (root.Data == null)
+            return false;
+        // Checks if the leaf nodes on the left and right are empty, also return false
+        else if (root.Left == null || root.Right == null)
             return false;
 
-        if (value < root.Data && root.Left != null)
+        // Case when value passed is less than the parent node
+        else if (value < root.Data)
+            // Check for a match on the left hand sub tree
+            if (root.Left.Data == value)
+                return true;
+            else
+                // Otherwise, make a recursive call and walk down the tree to visit the child nodes
+                return Contains(root.Left, value);
 
-            return Contains(root.Left, value);
-        else if (value > root.Data && root.Right != null)
-            return Contains(root.Right, value);
+        // Case when value passed is greater than the parent node
+        else if (value > root.Data)
+            // Check for a match on the right hand sub tree
+            if (root.Right.Data == value)
+                return true;
+            else
+                // Otherwise, make a recursive call and walk down the tree to visit the child nodes
+                return Contains(root.Right, value);
+
         else
             return true;
 
-        // if (Data == value)
-        // {
-        //     return true;
-        // }
-        // else if (Right is not null && Right.Data == value)
-        // {
-        //     return true;
-        // }
-        // else if (Left is not null && Left.Data == value)
-        // {
-        //     return true;
-        // }
 
-        //return Contains(value);
     }
 
     public int GetHeight()
