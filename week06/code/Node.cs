@@ -22,18 +22,45 @@ public class Node
         {
             // Insert to the left
             if (Left is null)
+            {
                 Left = new Node(value);
-            else
+                GetHeight();
+
+            }
+            else if (Left?.Data == value)
+            {
+
+                i--;
+
+            }
+
+            else if (Left is not null)
                 Left.Insert(value);
+
+
         }
         else
         {
             // Insert to the right
             if (Right is null)
+            {
                 Right = new Node(value);
-            else
+                GetHeight();
+            }
+            else if (Right?.Data == value)
+            {
+                i--;
+            }
+
+            else if (Right is not null)
                 Right.Insert(value);
+
+
         }
+
+
+
+
     }
 
     public bool Contains(Node? root, int value)
@@ -68,11 +95,19 @@ public class Node
 
 
     }
-
+    int i = 0;
     public int GetHeight()
     {
         // TODO Start Problem 4
 
-        return 0; // Replace this line with the correct return statement(s)
+        // if (6 == Left?.Data || Data == Right?.Data)
+        //     return i--;
+
+        // if (6 == Left?.Data)
+        ++i;
+
+
+
+        return i; // Replace this line with the correct return statement(s)
     }
 }

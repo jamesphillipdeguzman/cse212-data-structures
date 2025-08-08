@@ -20,6 +20,7 @@ public class BinarySearchTree : IEnumerable<int>
         else
         {
             _root.Insert(value);
+
         }
     }
 
@@ -94,6 +95,7 @@ public class BinarySearchTree : IEnumerable<int>
     /// </summary>
     public int GetHeight()
     {
+
         if (_root is null)
             return 0;
         return _root.GetHeight();
